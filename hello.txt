@@ -1,3 +1,2 @@
 Hello
-write form testtotest2
-write form testtotest3
+write form testwrite form testtotest3
