@@ -62,9 +62,30 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							"featureName": "OFFLINE_BILL_COLLECT",
 							"offset": "0",
 							"percentage": "0",
-							"type": "OFFLINE"
-							} 							
-				         ]
+							"type": "ONLINE_WEB",
+							"endPointURL": "https://devservices.wavemoney.io:8107/biller/solar-home"
+							},
+							{
+							"id": 56,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Yoma Micro Power",
+							"image": "billers/yoma-micro-power/roma_micro_power_logo.png",
+							"merchantCode": "yomamicropower",
+							"aggregator": "9797147000",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "ONLINE_WEB",
+							"endPointURL": "https://devservices.wavemoney.io:8107/biller/stemaco"
+							} 				         ]
 				      },
 				      {
 				         "category":"Loan Repayment",
