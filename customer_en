@@ -634,6 +634,34 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							"type": "OFFLINE"
 							}
 						]
+						},
+						{
+						"category": "FEATURE 2 BRANCH",
+						"billCategoryType": "3",
+						"categoryId": "11",
+						"imageUrl": "billers/categories/electronics_store_color.png",
+						"list": [
+							{
+							"id": 50,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Telco Myanmar",
+							"image": "billers/telco-myanmar/telco_myanmar_logo.png",
+							"merchantCode": "Telco Myanmar",
+							"aggregator": "9784119782",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}
+						]
 						}																	  
 				   ]
 				}
