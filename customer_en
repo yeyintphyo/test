@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <flow name="wmt-mfs-agent-get-biller-english-main-flow">
+		<set-variable variableName="flowName" value="wmt-mfs-agent-get-biller-english-main-flow" doc:name="Set Flow Name"/>
+        <logger message="At biller-english with product: #[message.inboundProperties.?product] and versionCode: #[message.inboundProperties.?versionCode]" level="INFO" doc:name="start" category="com.wmt.mfs.agent.exp.get-biller-english"/>
+        <set-variable variableName="versionCode" value="#[Integer.parseInt(message.inboundProperties.'versionCode')]" doc:name="set versionCode as integer"/>
+        <component  doc:name="JWTValidateAndForward">
+            <spring-object bean="jwtValidateAndForward"/>
+        </component>
+         <dw:transform-message doc:name="building biller list">
+            <dw:set-payload><![CDATA[%dw 1.0
+				%output application/json
+				---
+				
+				{
+				   "billerList":[
+				      {
+				         "category":"Solar",
+				         "billCategoryType":"3",
+				         "categoryId":"3",
+				         "imageUrl":"billers/categories/solar_color.png",
+				         "list":[
+				            {
+				               "id":4,
+				               "minSupportedVersion":{
+				                  "android":3009,
+				                  "iOS":0
+				               },
+				               "name":"Sun King Solar",
+				               "image":"billers/sun-king/sun_king_logo.png",
+				               "merchantCode":"SunKing",
+				               "aggregator":"sunking",
+				               "apiIndicator":2,
+				               "sendCharge":0,
+				               "isCustomerNumberRequired":true,
+				               "isBillReferenceRequired":false,
+				               "keyword":"OFFLINE_BILL_COLLECT",
+				               "featureName":"OFFLINE_BILL_COLLECT",
+				               "offset":"0",
+				               "percentage":"0",
+				               "type":"ONLINE"
+				            },
+							{
+							"id": 5,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Solar Home",
+							"image": "billers/solar-home/solar_home_logo.png",
+							"merchantCode": "SolarHome",
+							"aggregator": "solarhome",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							} 							
+				         ]
+				      },
+				      {
+				         "category":"Loan Repayment",
+				         "billCategoryType":"3",
+						 "categoryId":"4",
+				         "imageUrl":"billers/categories/loan_repayment_white.png",
+				         "list":[
+				            {
+				               "id":6,
+				               "minSupportedVersion":{
+				                  "android":0,
+				                  "iOS":0
+				               },
+				               "name":"AEON",
+				               "image":"billers/aeon/aeon_logo.png",
+				               "merchantCode":"AEON",
+				               "aggregator":"aeon",
+				               "apiIndicator":2,
+				               "sendCharge":0,
+				               "isCustomerNumberRequired":true,
+				               "isBillReferenceRequired":false,
+				               "keyword":"OFFLINE_BILL_COLLECT",
+				               "featureName":"OFFLINE_BILL_COLLECT",
+				               "offset":"0",
+				               "percentage":"0",
+				               "type":"OFFLINE"
+				            },
+				            {
+				               "id":10,
+				               "minSupportedVersion":{
+				                  "android":3009,
+				                  "iOS":0
+				               },
+				               "name":"Rent2Own",
+				               "image":"billers/rent2own/rent2own_logo.png",
+				               "merchantCode":"Rent2Own",
+				               "aggregator":"9769026881",
+				               "apiIndicator":2,
+				               "sendCharge":0,
+				               "isCustomerNumberRequired":true,
+				               "isBillReferenceRequired":false,
+				               "keyword":"OFFLINE_BILL_COLLECT",
+				               "featureName":"OFFLINE_BILL_COLLECT",
+				               "offset":"0",
+				               "percentage":"0",
+				               "type":"ONLINE_BILL_FETCH"
+				            },
+				            {
+				               "id":12,
+				               "minSupportedVersion":{
+				                  "android":3009,
+				                  "iOS":0
+				               },
+				               "name":"Mahar Bawga",
+				               "image":"billers/maharbawga/maharbawga_logo.png",
+				               "merchantCode":"Mahar Bawga",
+				               "aggregator":"9777877797",
+				               "apiIndicator":2,
+				               "sendCharge":0,
+				               "isCustomerNumberRequired":true,
+				               "isBillReferenceRequired":false,
+				               "keyword":"OFFLINE_BILL_COLLECT",
+				               "featureName":"OFFLINE_BILL_COLLECT",
+				               "offset":"0",
+				               "percentage":"0",
+				               "type":"OFFLINE"
+				            },
+				            {
+		                      "id": 13,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+		                      "name": "MoMo Finance",
+		                      "image": "billers/momo/momo_logo.png",
+		                      "merchantCode": "MoMo Finance",
+		                      "aggregator": "9443734559",
+		                      "apiIndicator": 2,
+		                      "sendCharge": 0,
+		                      "isCustomerNumberRequired": true,
+		                      "isBillReferenceRequired": false,
+		                      "keyword": "OFFLINE_BILL_COLLECT",
+		                      "featureName": "OFFLINE_BILL_COLLECT",
+		                      "offset": "0",
+		                      "percentage": "0",
+		                      "type": "OFFLINE"
+		                    },
+							{
+							"id": 20,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Star Moe Yan",
+							"image": "billers/star-moe-yan/star_moe_yan_logo.png",
+							"merchantCode": "Star Moe Yan",
+							"aggregator": "9777002150",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 21,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Pristine Global",
+							"image": "billers/pristine-global/pristine_global_logo.png",
+							"merchantCode": "Pristine Global",
+							"aggregator": "9751053586",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 24,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "QuicKyat",
+							"image": "billers/quick-kyat/quick_kyat_logo.png",
+							"merchantCode": "QuickKyat",
+							"aggregator": "95026649",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 25,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "ShweLan",
+							"image": "billers/shwe-lan/shwe_lan_logo.png",
+							"merchantCode": "ShweLan",
+							"aggregator": "9959539927",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 31,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "GL-AMMK",
+							"image": "billers/gl-ammk/gl_ammk_logo.png",
+							"merchantCode": "GL-AMMK",
+							"aggregator": "9445337737",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 22,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Mother Finance",
+							"image": "billers/mother-finance/monther_finance_logo.png",
+							"merchantCode": "Mother Finance",
+							"aggregator": "9400437316",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 39,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Imperial Myanmar Finance",
+							"image": "billers/imperial-myanmar/imperial_myanmar_logo.png",
+							"merchantCode": "Imperial Myanmar Finance",
+							"aggregator": "9404022456",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 26,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "MRHF",
+							"image": "billers/mrhf/mrhf_logo.png",
+							"merchantCode": "MRHF",
+							"aggregator": "9977062404",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 44,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Fullerton Myanmar",
+							"image": "billers/fullerton-myanmar/fullerton_myanmar_logo.png",
+							"merchantCode": "Fullerton Myanmar",
+							"aggregator": "9954657599",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 52,
+							"minSupportedVersion":{
+								"android":5000,
+								"iOS":0
+							},
+							"name": "JRC Company",
+							"image": "billers/jrc-company/jrc_company_logo.png",
+							"merchantCode": "JRC Company",
+							"aggregator": "9950006888",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}																																			
+				         ]
+				      },
+						{
+						"category": "Online Shopping Payment",
+						"billCategoryType": "3",
+						"categoryId":"7",
+						"imageUrl": "billers/ecommerce/ecommerce_color.png",
+						"list": [
+							{
+							"id": 16,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "rgo47",
+							"image": "billers/rgo47/rgo47_logo.png",
+							"merchantCode": "rgo47",
+							"aggregator": "9779997737",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 17,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Zegobird",
+							"image": "billers/zegobird/zegobird_logo.png",
+							"merchantCode": "Zegobird",
+							"aggregator": "9251897006",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 19,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "mBuyy",
+							"image": "billers/mbuyy/mbuyy_logo.png",
+							"merchantCode": "mBuyy",
+							"aggregator": "9979171448",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 37,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Shwe Gabar",
+							"image": "billers/shwe-gabar/shwe_gabar_logo.png",
+							"merchantCode": "Shwe Gabar",
+							"aggregator": "95118862",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 41,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Metro",
+							"image": "billers/metro/metro_logo.png",
+							"merchantCode": "Metro",
+							"aggregator": "9797391515",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}														             
+						]
+						},
+						{
+						"category": "Internet Service Provider",
+						"billCategoryType": "3",
+						"categoryId": "8",
+						"imageUrl": "billers/categories/internet_service_provider_color.png",
+						"list": [
+							{
+							"id": 27,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Kinetic Internet",
+							"image": "billers/kinetic/kinetic_logo.png",
+							"merchantCode": "Kinetic Internet",
+							"aggregator": "9977232869",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 49,
+							"minSupportedVersion":{
+								"android":5000,
+								"iOS":0
+							},
+							"name": "Net Core",
+							"image": "billers/net-core/net_core_logo.png",
+							"merchantCode": "Net Core",
+							"aggregator": "9964217374",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							},
+							{
+							"id": 34,
+							"minSupportedVersion":{
+								"android":5000,
+								"iOS":0
+							},
+							"name": "Stream Net Co., Ltd.(FTTX Internet)",
+							"image": "billers/fttx-internet/fttx_internet_logo.png",
+							"merchantCode": "Stream Net Co., Ltd.(FTTX Internet)",
+							"aggregator": "9443011999",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}
+						]
+						},
+						{
+						"category": "Agriculture",
+						"billCategoryType": "3",
+						"categoryId": "12",
+						"imageUrl": "billers/categories/agriculture_store_color.png",
+						"list": [
+							{
+							"id": 38,
+							"minSupportedVersion":{
+								"android":3009,
+								"iOS":0
+							},
+							"name": "Yetagon",
+							"image": "billers/yetagon/yetagon_logo.png",
+							"merchantCode": "Yetagon",
+							"aggregator": "9750228490",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}
+						]
+						},
+						{
+						"category": "Insurance Payment",
+						"billCategoryType": "3",
+						"categoryId": "14",
+						"imageUrl": "billers/categories/insurance_payment_color.png",
+						"list": [
+							{
+							"id": 46,
+							"minSupportedVersion":{
+								"android":5000,
+								"iOS":0
+							},
+							"name": "Young Insurance",
+							"image": "billers/young-insurance/young_insurance_logo.png",
+							"merchantCode": "Young Insurance",
+							"aggregator": "9457741225",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}
+						]
+						},
+						{
+						"category": "Electronics Store",
+						"billCategoryType": "3",
+						"categoryId": "11",
+						"imageUrl": "billers/categories/electronics_store_color.png",
+						"list": [
+							{
+							"id": 50,
+							"minSupportedVersion":{
+								"android":5000,
+								"iOS":0
+							},
+							"name": "Telco Myanmar",
+							"image": "billers/telco-myanmar/telco_myanmar_logo.png",
+							"merchantCode": "Telco Myanmar",
+							"aggregator": "9784119782",
+							"apiIndicator": 2,
+							"sendCharge": 0,
+							"isCustomerNumberRequired": true,
+							"isBillReferenceRequired": false,
+							"keyword": "OFFLINE_BILL_COLLECT",
+							"featureName": "OFFLINE_BILL_COLLECT",
+							"offset": "0",
+							"percentage": "0",
+							"type": "OFFLINE"
+							}
+						]
+						}																	  
+				   ]
+				}
+		]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="biller payload: #[message.payloadAs(java.lang.String)]" level="INFO" category="com.wmt.mfs.agent.exp.get-biller-english" doc:name="log payload"/>
+        <json:json-to-object-transformer returnClass="java.util.Map" mimeType="application/java" doc:name="JSON to Object"/>
+        <dw:transform-message doc:name="build final list">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+
+billerList: 
+  payload.billerList default [] map {
+    category: $.category,
+		billCategoryType: $.billCategoryType,
+		categoryId: $.categoryId,
+		imageUrl: $.imageUrl,
+    list: $.list filter flowVars.versionCode >= $.minSupportedVersion.iOS
+  } filter (sizeOf $.list) > 0 
+  when (upper inboundProperties.product) == upper p('product.ios')
+  otherwise 
+    payload.billerList default [] map {
+      category: $.category,
+			billCategoryType: $.billCategoryType,
+			categoryId: $.categoryId,
+			imageUrl: $.imageUrl,			
+      list: $.list filter flowVars.versionCode >= $.minSupportedVersion.android
+    } filter (sizeOf $.list) > 0
+]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="biller final payload: #[payload.toString().replaceAll('\\s','')]" level="INFO" doc:name="end" category="com.wmt.mfs.agent.exp.get-biller-english"/>
+    </flow>
+</mule>
