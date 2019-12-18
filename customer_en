@@ -335,13 +335,13 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							{
 							"id": 52,
 							"minSupportedVersion":{
-								"android":5000,
+								"android":3009,
 								"iOS":0
 							},
 							"name": "JRC Company",
 							"image": "billers/jrc-company/jrc_company_logo.png",
 							"merchantCode": "JRC Company",
-							"aggregator": "9950006888",
+							"aggregator": "996888",
 							"apiIndicator": 2,
 							"sendCharge": 0,
 							"isCustomerNumberRequired": true,
@@ -491,7 +491,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							{
 							"id": 49,
 							"minSupportedVersion":{
-								"android":5000,
+								"android":3009,
 								"iOS":0
 							},
 							"name": "Net Core",
@@ -511,7 +511,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							{
 							"id": 34,
 							"minSupportedVersion":{
-								"android":5000,
+								"android":3009,
 								"iOS":0
 							},
 							"name": "Stream Net Co., Ltd.(FTTX Internet)",
@@ -567,7 +567,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							{
 							"id": 46,
 							"minSupportedVersion":{
-								"android":5000,
+								"android":3009,
 								"iOS":0
 							},
 							"name": "Young Insurance",
@@ -595,7 +595,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 							{
 							"id": 50,
 							"minSupportedVersion":{
-								"android":5000,
+								"android":3009,
 								"iOS":0
 							},
 							"name": "Telco Myanmar",
